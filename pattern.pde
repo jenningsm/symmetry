@@ -1,10 +1,10 @@
 
 int sx = 700;
 int sy = 700;
-float cx = sx /2;
-float cy = sy / 2;
+int cx = sx /2;
+int cy = sy / 2;
 
-int symmetry = 7;
+int symmetry = 21;
 
 void setup(){
  
@@ -72,9 +72,10 @@ void setup(){
   PGraphics fin = createGraphics(sx, sy);
   fin.beginDraw();
 
+  float baseAng = - PI / (2 * symmetry);
 //  fin.blendMode(DARKEST);
   fin.translate(cx, cy);
-  fin.rotate(-2 * PI / 28);
+  fin.rotate(baseAng);
   for(int i = 0; i < symmetry; i++){
     fin.pushMatrix();
     fin.rotate(i * 2 * PI / symmetry);
@@ -83,6 +84,20 @@ void setup(){
   }
 
   fin.endDraw();
+  fin.loadPixels();
+  combine.loadPixels();
+  for(int i = 0; i < symmetry; i++){
+     for(float j = 0; j < maxDist; j += .1){
+       int tx = cx + floor(j * cos(baseAng + i * 2 * PI / symmetry));
+       int ty = cy + floor(j * sin(baseAng + i * 2 * PI / symmetry));
+       int a = (combine.pixels[floor(j)] >> 24) & 0xFF;
+       if(tx < sx && tx >= 0 && ty < sy && ty >= 0){
+         int a2 = (fin.pixels[tx + sx * ty] >> 24) & 0xFF;
+         fin.pixels[tx + sx * ty] = color(255, Math.max(a * .75, a2));
+       }
+    } 
+  }
+  fin.updatePixels();
 
   background(0);
 
