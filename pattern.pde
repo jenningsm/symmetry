@@ -4,7 +4,7 @@ int sy = 700;
 int cx = sx /2;
 int cy = sy / 2;
 
-int symmetry = 21;
+int symmetry = 7;
 
 void setup(){
  
@@ -14,12 +14,8 @@ void setup(){
   int scale = 1;
   PGraphics radSegm = createGraphics(sx * scale, sy * scale); 
   radSegm.beginDraw();
-
-//  radSegm.rotate((3 * PI / 4) - 2 * PI / (symmetry * 4)); 
   
   radSegm.rotate((PI / 2) + 2 * PI / (symmetry * 4)); 
- // radSegm.translate(cy /2, 0);
-  
   radSegm.background(0);
 
   radSegm.noStroke();
@@ -36,13 +32,11 @@ void setup(){
   
   PGraphics mirror = createGraphics(sx, sy);
   
-  float divideTheta = (1 + symmetry * .00) * PI / symmetry;
   
   mirror.beginDraw();
   mirror.background(0);
   mirror.scale(1, -1);
-  //rotate a little extra so that combine is just a little bit bigger and so therefore there won't be tiny little gaps when it gets tiled
-  mirror.rotate(-1 * ((PI / symmetry) + divideTheta));
+  mirror.rotate(-1 * (2 * PI / symmetry));
   mirror.image(radSegm, 0, 0);
   mirror.endDraw();  
   
@@ -53,7 +47,7 @@ void setup(){
   for(int i = 0; i < sx; i++){
     for(int j = 0; j< sy; j++){
       float theta = atan2(j, i);
-      if (theta <= divideTheta){
+      if (theta <= PI / symmetry){
         int r1 = (radSegm.pixels[i + sx * j] >> 16) & 0xFF;
         combine.pixels[i + sx * j] = color(255, r1); 
       } else {
@@ -73,7 +67,6 @@ void setup(){
   fin.beginDraw();
 
   float baseAng = - PI / (2 * symmetry);
-//  fin.blendMode(DARKEST);
   fin.translate(cx, cy);
   fin.rotate(baseAng);
   for(int i = 0; i < symmetry; i++){
@@ -84,23 +77,28 @@ void setup(){
   }
 
   fin.endDraw();
+  
   fin.loadPixels();
   combine.loadPixels();
-  for(int i = 0; i < symmetry; i++){
-     for(float j = 0; j < maxDist; j += .1){
-       int tx = cx + floor(j * cos(baseAng + i * 2 * PI / symmetry));
-       int ty = cy + floor(j * sin(baseAng + i * 2 * PI / symmetry));
-       int a = (combine.pixels[floor(j)] >> 24) & 0xFF;
-       if(tx < sx && tx >= 0 && ty < sy && ty >= 0){
-         int a2 = (fin.pixels[tx + sx * ty] >> 24) & 0xFF;
-         fin.pixels[tx + sx * ty] = color(255, Math.max(a * .75, a2));
-       }
+
+  for(int i = 0; i < sx; i++){
+    for(int j= 0; j< sy; j++){
+      float theta = atan2(j - cy + .5, i - cx + .5);
+      theta += 2 * PI;
+      theta -= baseAng;
+      float diff = Math.min(theta % (2 * PI / symmetry), (2 * PI / symmetry) - (theta % (2 * PI / symmetry)));
+      if(diff < .007){
+        float r = sqrt(pow(i - cx + .5, 2) + pow(j - cy + .5, 2));
+        int a = (combine.pixels[floor(r)] >> 24) & 0xFF;
+        int a2 = (fin.pixels[i + sx * j] >> 24) & 0xFF;
+        fin.pixels[i + sx * j] = color(255, Math.max(a, a2));
+      }
     } 
   }
+  
   fin.updatePixels();
 
   background(0);
-
   image(fin, 0, 0);
 
 }
