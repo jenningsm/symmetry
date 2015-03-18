@@ -16,7 +16,6 @@ void setup(){
   radSegm.beginDraw();
   
   radSegm.rotate((PI / 2) + 2 * PI / (symmetry * 4)); 
-  radSegm.background(0);
 
   radSegm.noStroke();
   radSegm.fill(255);
@@ -34,7 +33,6 @@ void setup(){
   
   
   mirror.beginDraw();
-  mirror.background(0);
   mirror.scale(1, -1);
   mirror.rotate(-1 * (2 * PI / symmetry));
   mirror.image(radSegm, 0, 0);
@@ -48,10 +46,10 @@ void setup(){
     for(int j = 0; j< sy; j++){
       float theta = atan2(j, i);
       if (theta <= PI / symmetry){
-        int r1 = (radSegm.pixels[i + sx * j] >> 16) & 0xFF;
+        int r1 = (radSegm.pixels[i + sx * j] >> 24) & 0xFF;
         combine.pixels[i + sx * j] = color(255, r1); 
       } else {
-        int r2 = (mirror.pixels[i + sx * j] >> 16) & 0xFF;
+        int r2 = (mirror.pixels[i + sx * j] >> 24) & 0xFF;
         combine.pixels[i + sx * j] = color(255, r2); 
       }
     } 
@@ -98,7 +96,7 @@ void setup(){
   
   fin.updatePixels();
 
-  background(0);
+//  background(0);
   image(fin, 0, 0);
 
 }
