@@ -1,5 +1,5 @@
 
-PGraphics createSymmetry(PGraphics source, int symmetry){
+PGraphics createSymmetry(PGraphics source, int symmetry, float offset){
   
   
   PGraphics mirror = createGraphics(source.width, source.height);
@@ -31,12 +31,13 @@ PGraphics createSymmetry(PGraphics source, int symmetry){
   PGraphics buffer = createGraphics(finx, finy);
   fin.loadPixels();
 
-  float offsetAng = - PI / (2 * symmetry);
+  
+  
   for(int i = 0; i < symmetry; i++){
      buffer.beginDraw();
      buffer.background(0, 0);
      buffer.translate(source.width, source.height);
-     buffer.rotate(offsetAng - ((PI / 4) - PI / symmetry) + i * 2 * PI / symmetry);
+     buffer.rotate( offset - ((PI / 4) - PI / symmetry) + i * 2 * PI / symmetry);
      buffer.image(combine, 0, 0);
      buffer.endDraw();
      
@@ -46,7 +47,7 @@ PGraphics createSymmetry(PGraphics source, int symmetry){
          float theta = atan2(k - source.height + .5, j - source.width + .5);
          theta += 2 * PI;
          theta = theta % (2 * PI);
-         float baseAng = offsetAng + i * 2 * PI / symmetry;
+         float baseAng = offset + i * 2 * PI / symmetry;
          if((theta >= baseAng && theta <= baseAng + 2 * PI / symmetry) ||
             (theta >= baseAng + 2 * PI && theta < baseAng + 2 * PI  + 2 * PI / symmetry)){
               

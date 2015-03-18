@@ -28,7 +28,8 @@ void setup(){
   radSegm.endShape();  
   radSegm.endDraw();
   
-  PGraphics s = createSymmetry(radSegm, 7);
+  PGraphics s = createSymmetry(radSegm, symmetry, -PI / (symmetry * 2));
   
+  background(0);
   image(s, 0, 0);
 }
