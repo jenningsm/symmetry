@@ -46,11 +46,9 @@ void setup(){
     for(int j = 0; j< sy; j++){
       float theta = atan2(j, i);
       if (theta <= PI / symmetry){
-        int r1 = (radSegm.pixels[i + sx * j] >> 24) & 0xFF;
-        combine.pixels[i + sx * j] = color(255, r1); 
+        combine.pixels[i + sx * j] = radSegm.pixels[i + sx * j];
       } else {
-        int r2 = (mirror.pixels[i + sx * j] >> 24) & 0xFF;
-        combine.pixels[i + sx * j] = color(255, r2); 
+        combine.pixels[i + sx * j] = mirror.pixels[i + sx * j];
       }
     } 
   }
