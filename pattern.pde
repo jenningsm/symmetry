@@ -72,9 +72,10 @@ PVector[][] rb(PVector point, float variability){
    
    PVector[] controls = new PVector[4];
    
+   float[] vars = { randomGaussian() * .4, randomGaussian() * .4};
    for(int i = 0; i < 2; i++){
-      controls[i*2] = new PVector(point.x, point.y + variability * (abs(randomGaussian()) + .25) * .4);
-      controls[i*2+1] = new PVector(point.x, point.y + variability * (abs(randomGaussian()) + .25) * .4);
+      controls[i*2] = new PVector(point.x, point.y + variability * vars[0] + variability * (i  - .5) * .25);
+      controls[i*2+1] = new PVector(point.x, point.y + variability * vars[1]  + variability * (i - .5) * .25);
    }
    
    PVector[][] ret = {anchors, controls};
