@@ -1,8 +1,8 @@
 
 int sx = 700;
 int sy = 700;
-int[] dims = {900, 900};
-//int[] dims = {851, 315};
+//int[] dims = {900, 900};
+int[] dims = {851, 315};
 int cx = sx /2;
 int cy = sy / 2;
 
@@ -41,8 +41,8 @@ void setup(){
 //  full(radSegm, dims, symmetry, 18000, 45, 3);
 
   //texture
-  radSegm.fill(255, 120);
-  full(radSegm, dims, symmetry, 40000, 45, 3);
+  radSegm.fill(255, 200);
+  full(radSegm, dims, symmetry, 20000, 45, 3);
 
 
   radSegm.endDraw();
