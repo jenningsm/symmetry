@@ -24,7 +24,6 @@ PGraphics createSymmetry(PGraphics source, int[] dims, int symmetry, float offse
   }
   combine.updatePixels();
 
-
 //  int finx = 2 * source.width;
 //  int finy = 2 * source.height;
   PGraphics fin = createGraphics(dims[0], dims[1]);
@@ -44,7 +43,7 @@ PGraphics createSymmetry(PGraphics source, int[] dims, int symmetry, float offse
      buffer.loadPixels();
      for(int j = 0; j < dims[0]; j++){
        for(int k = 0; k < dims[1]; k++){
-         float theta = atan2(k - (dims[0] * .5) + .5, j - (dims[1] * .5) + .5);
+         float theta = atan2(k - (dims[1] * .5) + .5, j - (dims[0] * .5) + .5);
          theta += 2 * PI;
          theta = theta % (2 * PI);
          float baseAng = offset + i * 2 * PI / symmetry;
