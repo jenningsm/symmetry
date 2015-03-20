@@ -1,0 +1,39 @@
+float scale = 1;
+
+void full(PGraphics canvas){
+   for(int i = 0; i < 1000; i++){
+    PVector pointone = new PVector((float) (Math.random() - .5) * cx, (float) Math.random() * cy * 2);
+    PVector pointtwo = randomPoint(pointone, 30);
+    PVector[] anc = {pointone, pointtwo};
+    PVector[] ctrls = rb2(anc, 25);
+    drawBezierShape(canvas, anc, ctrls);   
+  }
+}
+
+void one(PGraphics canvas){
+  PVector[] anchors = new PVector[2];
+  PVector[] controls = new PVector[4];
+  
+  anchors[0] = new PVector(50 * scale, cy * scale / 3);
+  anchors[1] = new PVector(-50 * scale, scale * cy/2);
+  controls[0] = new PVector(0, -(-(cy/2) - 10) * scale);
+  controls[1] = new PVector(0, -(-(cy/2) + 10) * scale);
+  controls[2] = new PVector(0, -(-(cy/2) - 20) * scale);
+  controls[3] = new PVector(0, -(-(cy/3) - 10) * scale);
+  drawBezierShape(canvas, anchors, controls);
+
+  
+}
+
+void two(PGraphics canvas){
+    for(int i = 0; i < 20  ; i++){
+    PVector[][] points = rb(new PVector(0, (i+1) * 20), 50);
+    drawBezierShape(canvas, points[0], points[1]);
+  }
+}
+
+void rb2test(PGraphics canvas){
+  PVector[] as = { new PVector(0, 200), new PVector(0, 300) };
+  PVector[] cs = rb2(as, 150);
+  drawBezierShape(canvas, as, cs, true);
+}
