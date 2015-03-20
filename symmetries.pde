@@ -1,5 +1,5 @@
 
-PGraphics createSymmetry(PGraphics source, int symmetry, float offset){
+PGraphics createSymmetry(PGraphics source, int[] dims, int symmetry, float offset){
   
   
   PGraphics mirror = createGraphics(source.width, source.height);
@@ -25,10 +25,10 @@ PGraphics createSymmetry(PGraphics source, int symmetry, float offset){
   combine.updatePixels();
 
 
-  int finx = 2 * source.width;
-  int finy = 2 * source.height;
-  PGraphics fin = createGraphics(finx, finy);
-  PGraphics buffer = createGraphics(finx, finy);
+//  int finx = 2 * source.width;
+//  int finy = 2 * source.height;
+  PGraphics fin = createGraphics(dims[0], dims[1]);
+  PGraphics buffer = createGraphics(dims[0], dims[1]);
   fin.loadPixels();
 
   
@@ -36,22 +36,22 @@ PGraphics createSymmetry(PGraphics source, int symmetry, float offset){
   for(int i = 0; i < symmetry; i++){
      buffer.beginDraw();
      buffer.background(0, 0);
-     buffer.translate(source.width, source.height);
+     buffer.translate(dims[0] * .5, dims[1] * .5);
      buffer.rotate( offset - ((PI / 4) - PI / symmetry) + i * 2 * PI / symmetry);
      buffer.image(combine, 0, 0);
      buffer.endDraw();
      
      buffer.loadPixels();
-     for(int j = 0; j < finx; j++){
-       for(int k = 0; k < finy; k++){
-         float theta = atan2(k - source.height + .5, j - source.width + .5);
+     for(int j = 0; j < dims[0]; j++){
+       for(int k = 0; k < dims[1]; k++){
+         float theta = atan2(k - (dims[0] * .5) + .5, j - (dims[1] * .5) + .5);
          theta += 2 * PI;
          theta = theta % (2 * PI);
          float baseAng = offset + i * 2 * PI / symmetry;
          if((theta >= baseAng && theta <= baseAng + 2 * PI / symmetry) ||
             (theta >= baseAng + 2 * PI && theta < baseAng + 2 * PI  + 2 * PI / symmetry)){
               
-           fin.pixels[j + finx * k] = buffer.pixels[j + finx * k];
+           fin.pixels[j + dims[0] * k] = buffer.pixels[j + dims[0] * k];
          }
        } 
      }
