@@ -1,11 +1,11 @@
 float scale = 1;
 
-void full(PGraphics canvas, int[] dims){
-   for(int i = 0; i < 1000; i++){
+void full(PGraphics canvas, int[] dims, int num, float size){
+   for(int i = 0; i < 1300; i++){
     PVector pointone = new PVector((float) (Math.random() - .5) * dims[0] * .5, (float) Math.random() * dims[1]);
-    PVector pointtwo = randomPoint(pointone, 30);
+    PVector pointtwo = randomPoint(pointone, 30 * size);
     PVector[] anc = {pointone, pointtwo};
-    PVector[] ctrls = rb2(anc, 25);
+    PVector[] ctrls = rb2(anc, 25 * size);
     drawBezierShape(canvas, anc, ctrls);   
   }
 }

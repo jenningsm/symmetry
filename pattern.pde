@@ -1,7 +1,7 @@
 
 int sx = 700;
 int sy = 700;
-int[] dims = {700, 700};
+int[] dims = {900, 900};
 int cx = sx /2;
 int cy = sy / 2;
 
@@ -15,7 +15,7 @@ void draw() {};
 
 void setup(){
  
-  size(sx, sy);
+  size(dims[0], dims[1]);
   
   PGraphics radSegm = createGraphics(floor(dims[0] * .7), floor(dims[0] * .7)); 
   
@@ -24,7 +24,8 @@ void setup(){
   radSegm.noStroke();
   radSegm.fill(255);
   
-  full(radSegm, dims);
+  full(radSegm, dims, 1300, 1.1);
+//  full(radSegm, dims, 300, 1.4);
 
   radSegm.endDraw();
   background(0);
