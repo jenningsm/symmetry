@@ -1,8 +1,8 @@
 
 int sx = 700;
 int sy = 700;
-//int[] dims = {900, 900};
-int[] dims = {851, 315};
+int[] dims = {900, 900};
+//int[] dims = {851, 315};
 int cx = sx /2;
 int cy = sy / 2;
 
@@ -12,7 +12,7 @@ PGraphics s;
 
 void mouseClicked(){
 //  s.save("textures/out###.png"); 
-  saveFrame("textures/out###.png");
+  saveFrame("greys/out###.png");
 }
 
 void draw() {};
@@ -34,15 +34,16 @@ void setup(){
 //  one(radSegm);
 
   //smalls
-//  full(radSegm, dims, symmetry, 10000, 15, 17);
+  full(radSegm, dims, symmetry, 10000, 15, 17);
+ //   full(radSegm, dims, symmetry, 12000, 30, 3);
 
   //lines
 //  radSegm.fill(150, 150, 80, 200);
 //  full(radSegm, dims, symmetry, 18000, 45, 3);
 
   //texture
-  radSegm.fill(255, 200);
-  full(radSegm, dims, symmetry, 20000, 45, 3);
+ // radSegm.fill(255, 230);
+ // full(radSegm, dims, symmetry, 13000, 45, 3);
 
 
   radSegm.endDraw();

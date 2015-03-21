@@ -12,7 +12,7 @@ PVector[] rb2(PVector[] anchors, float variability){
   
   for(int i = 0; i < 2; i++){
     float gap = (float) (.5 + .5 * Math.random()) * variability;
-    float controlHeight = (float) Math.random() * variability * .5;
+    float controlHeight = (float) Math.random() * variability;
     float axis = (float) Math.random();
        
     for(int j = 0; j < 2; j++){
