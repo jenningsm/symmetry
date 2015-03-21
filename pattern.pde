@@ -1,10 +1,7 @@
 
-int sx = 700;
-int sy = 700;
 int[] dims = {900, 900};
 //int[] dims = {851, 315};
-int cx = sx /2;
-int cy = sy / 2;
+
 
 int symmetry = 7;
 
@@ -26,8 +23,7 @@ void setup(){
 //  PGraphics radSegm = setupBuffer(symmetry, dims);
 //  one(radSegm);
 
-  //smalls
-  
+  //smalls  
   PGraphics radSegm = full(dims, symmetry, 8000, 15, 17, 6);
  //   full(dims, symmetry, 12000, 30, 3);
 
@@ -42,7 +38,6 @@ void setup(){
   s = createSymmetry(radSegm, dims,  symmetry, -PI / (symmetry * 2)  );
   
   background(110);
-//  image(radSegm, 0, 0);
   image(s, 0, 0);
 
 }

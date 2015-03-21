@@ -1,4 +1,4 @@
-float scale = 1;
+
 
 PGraphics full(int[] dims, int symmetry, int num, float size){
   return full(dims, symmetry, num, size * 30, size * 25, 2);
@@ -25,16 +25,18 @@ PGraphics full(int[] dims, int symmetry, int num, float l, float w, float curvat
   return canvas;
 }
 
+
+float scale = 1;
 void one(PGraphics canvas){
   PVector[] anchors = new PVector[2];
   PVector[] controls = new PVector[4];
   
-  anchors[0] = new PVector(50 * scale, cy * scale / 3);
-  anchors[1] = new PVector(-50 * scale, scale * cy/2);
-  controls[0] = new PVector(0, -(-(cy/2) - 10) * scale);
-  controls[1] = new PVector(0, -(-(cy/2) + 10) * scale);
-  controls[2] = new PVector(0, -(-(cy/2) - 20) * scale);
-  controls[3] = new PVector(0, -(-(cy/3) - 10) * scale);
+  anchors[0] = new PVector(50 * scale, dims[1] * scale / 3);
+  anchors[1] = new PVector(-50 * scale, scale * dims[1]/2);
+  controls[0] = new PVector(0, -(-(dims[1]/2) - 10) * scale);
+  controls[1] = new PVector(0, -(-(dims[1]/2) + 10) * scale);
+  controls[2] = new PVector(0, -(-(dims[1]/2) - 20) * scale);
+  controls[3] = new PVector(0, -(-(dims[1]/3) - 10) * scale);
   drawBezierShape(canvas, anchors, controls);
 
   
