@@ -1,6 +1,9 @@
 
-
 PVector[] rb2(PVector[] anchors, float variability){
+  return rb2(anchors, variability, 2);
+}
+
+PVector[] rb2(PVector[] anchors, float variability, float curvature){
   
   PVector[] controls = new PVector[4];
   
@@ -12,7 +15,7 @@ PVector[] rb2(PVector[] anchors, float variability){
   
   for(int i = 0; i < 2; i++){
     float gap = (float) (.5 + .5 * Math.random()) * variability;
-    float controlHeight = (float) Math.random() * variability;
+    float controlHeight = (float) (Math.random() - .5) * variability * curvature;
     float axis = (float) Math.random();
        
     for(int j = 0; j < 2; j++){

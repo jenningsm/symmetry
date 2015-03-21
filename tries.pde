@@ -1,16 +1,20 @@
 float scale = 1;
 
 void full(PGraphics canvas, int[] dims, int symmetry, int num, float size){
-  full(canvas, dims, symmetry, num, size * 30, size * 25);
+  full(canvas, dims, symmetry, num, size * 30, size * 25, 2);
 }
 
 void full(PGraphics canvas, int[] dims, int symmetry, int num, float l, float w){
+  full(canvas, dims, symmetry, num, l, w, 2);
+}
+
+void full(PGraphics canvas, int[] dims, int symmetry, int num, float l, float w, float curvature){
    for(int i = 0; i < num; i++){
     float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
     PVector pointone = new PVector((float) (Math.random() - .5) * breadth, (float) Math.random() * max(dims[1], dims[0]));
     PVector pointtwo = randomPoint(pointone, l);
     PVector[] anc = {pointone, pointtwo};
-    PVector[] ctrls = rb2(anc, w);
+    PVector[] ctrls = rb2(anc, w, curvature);
     drawBezierShape(canvas, anc, ctrls);   
   }
 }

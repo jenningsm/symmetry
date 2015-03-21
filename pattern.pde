@@ -12,7 +12,7 @@ PGraphics s;
 
 void mouseClicked(){
 //  s.save("textures/out###.png"); 
-  saveFrame("greys/out###.png");
+  saveFrame("greys/smalls/out###.png");
 }
 
 void draw() {};
@@ -34,7 +34,7 @@ void setup(){
 //  one(radSegm);
 
   //smalls
-  full(radSegm, dims, symmetry, 10000, 15, 17);
+  full(radSegm, dims, symmetry, 8000, 15, 17, 6);
  //   full(radSegm, dims, symmetry, 12000, 30, 3);
 
   //lines
@@ -47,7 +47,7 @@ void setup(){
 
 
   radSegm.endDraw();
-  background(140);
+  background(110);
 //  background(160, 160, 110);
 
 
