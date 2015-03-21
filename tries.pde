@@ -1,14 +1,17 @@
 float scale = 1;
 
-void full(PGraphics canvas, int[] dims, int symmetry, int num, float size){
-  full(canvas, dims, symmetry, num, size * 30, size * 25, 2);
+PGraphics full(int[] dims, int symmetry, int num, float size){
+  return full(dims, symmetry, num, size * 30, size * 25, 2);
 }
 
-void full(PGraphics canvas, int[] dims, int symmetry, int num, float l, float w){
-  full(canvas, dims, symmetry, num, l, w, 2);
+PGraphics full(int[] dims, int symmetry, int num, float l, float w){
+  return full(dims, symmetry, num, l, w, 2);
 }
 
-void full(PGraphics canvas, int[] dims, int symmetry, int num, float l, float w, float curvature){
+PGraphics full(int[] dims, int symmetry, int num, float l, float w, float curvature){
+  
+   PGraphics canvas = setupBuffer(symmetry, dims);
+   
    for(int i = 0; i < num; i++){
     float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
     PVector pointone = new PVector((float) (Math.random() - .5) * breadth, (float) Math.random() * max(dims[1], dims[0]));
@@ -17,6 +20,9 @@ void full(PGraphics canvas, int[] dims, int symmetry, int num, float l, float w,
     PVector[] ctrls = rb2(anc, w, curvature);
     drawBezierShape(canvas, anc, ctrls);   
   }
+
+  canvas.endDraw();
+  return canvas;
 }
 
 void one(PGraphics canvas){
@@ -34,15 +40,3 @@ void one(PGraphics canvas){
   
 }
 
-void two(PGraphics canvas){
-    for(int i = 0; i < 20  ; i++){
-    PVector[][] points = rb(new PVector(0, (i+1) * 20), 50);
-    drawBezierShape(canvas, points[0], points[1]);
-  }
-}
-
-void rb2test(PGraphics canvas){
-  PVector[] as = { new PVector(0, 200), new PVector(0, 300) };
-  PVector[] cs = rb2(as, 150);
-  drawBezierShape(canvas, as, cs, true);
-}

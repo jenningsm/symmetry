@@ -27,36 +27,6 @@ PVector[] rb2(PVector[] anchors, float variability, float curvature){
   return controls;
 }
 
-PVector[][] rb(PVector point, float variability){
-   PVector[] anchors = { new PVector(point.x - abs(randomGaussian()) * variability, point.y), new PVector(point.x + abs(randomGaussian()) * variability, point.y ) };
-   
-   PVector[] controls = new PVector[4];
-   
-   float[] vars = { randomGaussian() * .4, randomGaussian() * .4};
-   for(int i = 0; i < 2; i++){
-      controls[i*2] = new PVector(point.x, point.y + variability * vars[0] + variability * (i  - .5) * .25);
-      controls[i*2+1] = new PVector(point.x, point.y + variability * vars[1]  + variability * (i - .5) * .25);
-   }
-   
-   PVector[][] ret = {anchors, controls};
-   return ret;
-}
-
-PVector[][] randomBezierShape(PVector point, float variability){
-   PVector[] anchors = new PVector[2];
-   PVector[] controls = new PVector[4];
-   PVector[][] ret = { anchors, controls};
-   
-   for(int i = 0; i < 2; i++){
-     for(int j = 0; j < ret[i].length; j += 2){
-       float v = variability / 2;
-       ret[i][j] = randomPoint(new PVector(point.x - v, point.y), variability); 
-       ret[i][j+1] = randomPoint(new PVector(point.x + v, point.y), variability); 
-     }
-   }
-   return ret;
-}
-
 PVector randomPoint(PVector point, float variability){
   float theta = random(2 * PI);
   float r = randomGaussian() * variability;

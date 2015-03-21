@@ -1,7 +1,7 @@
 
 PGraphics createSymmetry(PGraphics source, int[] dims, int symmetry, float offset){
   
-  
+
   PGraphics mirror = createGraphics(source.width, source.height);
     
   mirror.beginDraw();
@@ -24,12 +24,9 @@ PGraphics createSymmetry(PGraphics source, int[] dims, int symmetry, float offse
   }
   combine.updatePixels();
 
-//  int finx = 2 * source.width;
-//  int finy = 2 * source.height;
   PGraphics fin = createGraphics(dims[0], dims[1]);
   PGraphics buffer = createGraphics(dims[0], dims[1]);
   fin.loadPixels();
-
   
   
   for(int i = 0; i < symmetry; i++){
