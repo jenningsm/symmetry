@@ -1,19 +1,22 @@
 
 
-PGraphics full(int[] dims, int symmetry, int num, float size){
-  return full(dims, symmetry, num, size * 30, size * 25, 2);
+PGraphics full(int[] dims, int symmetry, float density, float size){
+  return full(dims, symmetry, density, size * 30, size * 25, 2);
 }
 
-PGraphics full(int[] dims, int symmetry, int num, float l, float w){
-  return full(dims, symmetry, num, l, w, 2);
+PGraphics full(int[] dims, int symmetry, float density, float l, float w){
+  return full(dims, symmetry, density, l, w, 2);
 }
 
-PGraphics full(int[] dims, int symmetry, int num, float l, float w, float curvature){
+PGraphics full(int[] dims, int symmetry, float density, float l, float w, float curvature){
   
    PGraphics canvas = setupBuffer(symmetry, dims);
    
+   float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
+   float num = density * breadth * max(dims[1], dims[0]);
+   
    for(int i = 0; i < num; i++){
-    float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
+
     PVector pointone = new PVector((float) (Math.random() - .5) * breadth, (float) Math.random() * max(dims[1], dims[0]));
     PVector pointtwo = randomPoint(pointone, l);
     PVector[] anc = {pointone, pointtwo};
