@@ -7,11 +7,14 @@ PGraphics randOne(int[] dims){
     float area = random(areaMin, areaMax);
     
     float l = area / (7 + random(0, (area / 7) - 7));
-    //float w = random(7, 25);
     float w = area / l;
-    float curve = (float) Math.random() * 12;
+    if(w > l){
+      float hold = w;
+      w = l;
+      l = hold; 
+    }
     
-    //float density = pow(1.03, random(-1, 1) * 3) * 4.19 / (l * w); 
+    float curve = (float) Math.random() * 12;
     float density = 4.19 / (l * w);
   
     PGraphics radSegm = full(dims, symmetry, density, l, w, curve);
