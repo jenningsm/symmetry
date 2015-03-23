@@ -1,13 +1,7 @@
 
 int[] dims = {900, 900};
-//int[] dims = {851, 315};
 
 PGraphics s;
-
-void mouseClicked(){
-//  s.save("textures/out###.png"); 
-  saveFrame("greys/rands/out###.png");
-}
 
 int count = 0;
 
@@ -17,7 +11,7 @@ void draw() {
   
   background(110);
   image(s, 0, 0);
-  saveFrame("greys/rands/out###.tiff");
+  saveFrame("greys/rands/out###.png");
   if(count >= 15){
     exit(); 
   }

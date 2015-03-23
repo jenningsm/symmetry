@@ -1,8 +1,4 @@
 
-PVector[] rb2(PVector[] anchors, float variability){
-  return rb2(anchors, variability, 2);
-}
-
 PVector[] rb2(PVector[] anchors, float variability, float curvature){
   
   PVector[] controls = new PVector[4];
