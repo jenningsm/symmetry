@@ -1,13 +1,5 @@
 
 
-PGraphics full(int[] dims, int symmetry, float density, float size){
-  return full(dims, symmetry, density, size * 30, size * 25, 2);
-}
-
-PGraphics full(int[] dims, int symmetry, float density, float l, float w){
-  return full(dims, symmetry, density, l, w, 2);
-}
-
 PGraphics full(int[] dims, int symmetry, float density, float l, float w, float curvature){
   
    PGraphics canvas = setupBuffer(symmetry, dims);

@@ -1,8 +1,6 @@
 
 int[] dims = {900, 900};
 
-PGraphics s;
-
 int count = 0;
 
 void draw() {
