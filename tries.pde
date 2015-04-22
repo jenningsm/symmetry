@@ -18,7 +18,7 @@ PGraphics populate(int[] dims, int symmetry, float density, float l, float w, fl
    }
    layers[numLayers-1] = num;
 
-   PVector[] points = generatePoints(breadth, max(dims[0], dims[1]), layers, l * w);
+   PVector[] points = generatePoints(breadth, max(dims[0], dims[1]), layers, l * w / curvature);
    PVector[] anchors = new PVector[num * 2];
 
    for(int i = 0; i < num; i++){
@@ -58,7 +58,7 @@ PVector[] generatePoints(float breadth, float mHeight, int[] nums, float shapeAr
     for(int j = 0; j < attractors.length; j++){
       float dist = (float) Math.sqrt((float) (Math.pow(points[i].x - attractors[j].x, 2) + Math.pow(points[i].y - attractors[j].y, 2)));
       float force = 1.5 / (dist * dist * attractors.length * shapeArea);
-      force *= Math.pow(10, 9);
+      force *= Math.pow(10, 8);
       force = min(force, dist);
       float dir = (float) Math.atan2(attractors[j].y - points[i].y, attractors[j].x - points[i].x);
       diffs[0] += cos(dir) * force;
