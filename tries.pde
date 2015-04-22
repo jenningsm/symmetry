@@ -7,7 +7,17 @@ PGraphics populate(int[] dims, int symmetry, float density, float l, float w, fl
    float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
    int num = (int) Math.floor(density * breadth * max(dims[1], dims[0]));
 
-   int[] layers = {10, 200, num};
+
+   int branching = 50;
+   int numLayers = (int) Math.ceil(Math.log(num) / Math.log(branching));
+   int[] layers = new int[numLayers];
+   int numPoints = 15;
+   for(int i = 0; i < numLayers - 1; i++){
+     layers[i] = numPoints;
+     numPoints *= branching;
+   }
+   layers[numLayers-1] = num;
+
    PVector[] points = generatePoints(breadth, max(dims[0], dims[1]), layers);
    PVector[] anchors = new PVector[num * 2];
 
@@ -47,7 +57,7 @@ PVector[] generatePoints(float breadth, float mHeight, int[] nums, int depth, PV
     float[] diffs = {0f, 0f};
     for(int j = 0; j < attractors.length; j++){
       float dist = (float) Math.sqrt((float) (Math.pow(points[i].x - attractors[j].x, 2) + Math.pow(points[i].y - attractors[j].y, 2)));
-      float force = Math.min(dist, 1000000 / (dist * dist * attractors.length));
+      float force = Math.min(dist, 700000 / (dist * dist * attractors.length));
       float dir = (float) Math.atan2(attractors[j].y - points[i].y, attractors[j].x - points[i].x);
       diffs[0] += cos(dir) * force;
       diffs[1] += sin(dir) * force;
