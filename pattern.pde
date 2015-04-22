@@ -5,7 +5,7 @@ int count = 0;
 
 void draw() {
   
-  PGraphics s = randOne(dims);
+  PGraphics s = generator(dims);
   
   background(110);
   image(s, 0, 0);
@@ -22,6 +22,11 @@ void draw() {
 void setup(){
  
   size(dims[0], dims[1]);
+    PGraphics s = generator(dims);
+  
+  background(110);
+  image(s, 0, 0);
+  noLoop();
   
 }
 

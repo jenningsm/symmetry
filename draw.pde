@@ -3,6 +3,7 @@ void drawBezierShape(PGraphics canvas, PVector[] anchors, PVector[] controls){
 }
 
 void drawBezierShape(PGraphics canvas, PVector[] anchors, PVector[] controls, Boolean debug){
+  canvas.fill(255);
   canvas.beginShape();  
   canvas.vertex(anchors[0].x, anchors[0].y);
   canvas.bezierVertex(controls[0].x, controls[0].y, controls[1].x, controls[1].y, anchors[1].x, anchors[1].y);

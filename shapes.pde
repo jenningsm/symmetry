@@ -1,5 +1,5 @@
 
-PVector[] rb2(PVector[] anchors, float variability, float curvature){
+PVector[] bezierControlPoints(PVector[] anchors, float variability, float curvature){
   
   PVector[] controls = new PVector[4];
   
