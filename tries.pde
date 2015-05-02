@@ -7,16 +7,15 @@ PGraphics populate(int[] dims, int symmetry, float density, float l, float w, fl
    float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
    int num = (int) Math.floor(density * breadth * max(dims[1], dims[0]));
 
-
-   int branching = 20;
-   int numLayers = (int) Math.ceil(Math.log(num) / Math.log(branching));
+   int numLayers = (int) Math.round(Math.log(num) / Math.log(7));
+   int branching = (int) Math.floor(Math.pow(num, 1f / numLayers));
    int[] layers = new int[numLayers];
-   int numPoints = 20;
+   int numPoints = branching;
    for(int i = 0; i < numLayers - 1; i++){
-     layers[i] = numPoints;
-     numPoints *= branching;
+      layers[i] = numPoints;
+      numPoints *= branching;
    }
-   layers[numLayers-1] = num;
+   layers[numLayers -1] = num;
 
    PVector[] points = generatePoints(breadth, max(dims[0], dims[1]), layers, l * w / curvature);
    PVector[] anchors = new PVector[num * 2];
