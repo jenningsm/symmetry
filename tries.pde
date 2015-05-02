@@ -11,7 +11,7 @@ PGraphics populate(int[] dims, int symmetry, float density, float l, float w, fl
    int branching = 20;
    int numLayers = (int) Math.ceil(Math.log(num) / Math.log(branching));
    int[] layers = new int[numLayers];
-   int numPoints = 10;
+   int numPoints = 20;
    for(int i = 0; i < numLayers - 1; i++){
      layers[i] = numPoints;
      numPoints *= branching;

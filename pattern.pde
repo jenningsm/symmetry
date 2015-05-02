@@ -1,5 +1,5 @@
 
-int[] dims = {900, 900};
+int[] dims = {825, 1125};
 
 int count = 0;
 
@@ -9,8 +9,8 @@ void draw() {
   
   background(110);
   image(s, 0, 0);
-  saveFrame("greys/rands/out###.png");
-  if(count >= 15){
+  saveFrame("greys/attractors/out###.png");
+  if(count >= 40){
     exit(); 
   }
   
@@ -22,11 +22,13 @@ void draw() {
 void setup(){
  
   size(dims[0], dims[1]);
-    PGraphics s = generator(dims);
+ 
+ 
+ /*   PGraphics s = generator(dims);
   
   background(110);
   image(s, 0, 0);
-  noLoop();
+  noLoop();*/
   
 }
 
