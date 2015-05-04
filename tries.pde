@@ -1,9 +1,19 @@
+/*
 
+dimensions to tweak at:
+
+overpopulating
+attractor force
+attractor force relative to container size
+
+*/
 
 PGraphics populate(int[] dims, int symmetry, float density, float l, float w, float curvature){
   
    PGraphics canvas = setupBuffer(symmetry, dims);
    
+   //overpopulating
+   //float breadth = 1.5 * sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
    float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
    int num = (int) Math.floor(density * breadth * max(dims[1], dims[0]));
 
@@ -55,9 +65,10 @@ PVector[] generatePoints(float breadth, float mHeight, int[] nums, float shapeAr
   for(int i = 0; i < num; i++){
     float[] diffs = {0f, 0f};
     for(int j = 0; j < attractors.length; j++){
+      /* SIZE SPECIFIC POINT HERE */
       float dist = (float) Math.sqrt((float) (Math.pow(points[i].x - attractors[j].x, 2) + Math.pow(points[i].y - attractors[j].y, 2)));
-      float force = 1.5 / (dist * dist * attractors.length * shapeArea);
-      force *= Math.pow(10, 8);
+      float force = 6 * breadth / (dist * dist * attractors.length * shapeArea);
+      force *= Math.pow(10, 4);
       force = min(force, dist);
       float dir = (float) Math.atan2(attractors[j].y - points[i].y, attractors[j].x - points[i].x);
       diffs[0] += cos(dir) * force;
