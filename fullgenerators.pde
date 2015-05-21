@@ -27,6 +27,7 @@ PGraphics generator(int[] dims){
     float density = pow(1.03, random(-1, 1) * 1.5) * 4.19 / area;
   
     PGraphics radSegm = populate(dims, symmetry, density, len, wid, curve);
+//    return radSegm;
 
     float offset = (symmetry % 2 == 0 ? 0 : -PI / (symmetry * 2));
     return createSymmetry(radSegm, dims,  symmetry, offset  );

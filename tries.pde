@@ -17,7 +17,7 @@ PGraphics populate(int[] dims, int symmetry, float density, float l, float w, fl
    float breadth = sin(PI / (symmetry * 2)) * max(dims[0], dims[1]) * 2;
    int num = (int) Math.floor(density * breadth * max(dims[1], dims[0]));
 
-   int numLayers = (int) Math.round(Math.log(num) / Math.log(7));
+/*   int numLayers = (int) Math.round(Math.log(num) / Math.log(7));
    int branching = (int) Math.floor(Math.pow(num, 1f / numLayers));
    int[] layers = new int[numLayers];
    int numPoints = branching;
@@ -25,7 +25,13 @@ PGraphics populate(int[] dims, int symmetry, float density, float l, float w, fl
       layers[i] = numPoints;
       numPoints *= branching;
    }
-   layers[numLayers -1] = num;
+   layers[numLayers -1] = num;*/
+   
+   int numLayers = 5;
+   int[] layers = new int[numLayers];
+   for(int i = 0; i < numLayers; i++){
+     layers[i] = num;
+   }
 
    PVector[] points = generatePoints(breadth, max(dims[0], dims[1]), layers, l * w / curvature);
    PVector[] anchors = new PVector[num * 2];
@@ -62,14 +68,25 @@ PVector[] generatePoints(float breadth, float mHeight, int[] nums, float shapeAr
     points[i] = new PVector((float) (Math.random() - .5) * breadth, (float) Math.random() * mHeight);
   }
   
+  float forceConstant = (float) (2.3 * breadth * Math.pow(10, 5) / (attractors.length * shapeArea));
+  float constantRoot = (float) Math.pow(forceConstant, 2.0f / 3.0f);
+  
   for(int i = 0; i < num; i++){
     float[] diffs = {0f, 0f};
     for(int j = 0; j < attractors.length; j++){
       /* SIZE SPECIFIC POINT HERE */
-      float dist = (float) Math.sqrt((float) (Math.pow(points[i].x - attractors[j].x, 2) + Math.pow(points[i].y - attractors[j].y, 2)));
-      float force = 6 * breadth / (dist * dist * attractors.length * shapeArea);
-      force *= Math.pow(10, 4);
-      force = min(force, dist);
+      float xdiff = points[i].x - attractors[j].x;
+      float ydiff = points[i].y - attractors[j].y;
+      float distSquared =  xdiff * xdiff + ydiff * ydiff;
+      
+      float force;
+      //if distSquared is less than constantRoot, then forceConstant / distSquared would be greater than
+      //the distance between the two points, so we just set the force to the distance instead
+      if(distSquared < constantRoot){
+        force = (float) Math.sqrt(distSquared);
+      } else {
+        force = forceConstant / distSquared;
+      }
       float dir = (float) Math.atan2(attractors[j].y - points[i].y, attractors[j].x - points[i].x);
       diffs[0] += cos(dir) * force;
       diffs[1] += sin(dir) * force;
